@@ -24,7 +24,11 @@ git checkout step01
 文档的README.md的更新方式可以git checkout master 之后复制回来。这样就不必使用任何merge操作。
 
 最后分支效果图应该为(done中含commit代码，其他分支仅当tag使用)
+
+```
     step01 -> step02-done -> step03-done -> step04-done ... 
           \               \               \
            -> step02       -> step03      -> step04
+```
+
 

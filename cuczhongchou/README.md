@@ -14,5 +14,3 @@ git checkout master
 python manage.py runserver
 
 ##step02:
-
-
