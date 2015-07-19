@@ -4,6 +4,10 @@ from django.core.urlresolvers import reverse
 
 # Create your views here.
 from django.http import HttpResponse
+
+#常见异常import
+from exceptions import ValueError
+from django.utils.datastructures import MultiValueDictKeyError
  
 #step02 默认首页
 def index(request):
@@ -20,10 +24,21 @@ def index(request):
 # step03 Examples: 从/add/?a=4&b=5 读取参数
 # urls.py url(r'^add/$', 'learn.views.add', name='add'), 
 def add(request):
-    a = request.GET['a']
-    b = request.GET['b']
-    c = int(a)+int(b)
-    return HttpResponse("从/add/?a=4&b=5 读取参数:" + "a+b= " + str(c))
+	try:
+	    a = request.GET['a']
+	    b = request.GET['b']
+	    c = int(a)+int(b)
+	    return HttpResponse("从/add/?a=4&b=5 读取参数:" + "a+b= " + str(c))
+	
+	#参数异常处理
+	except ValueError as e:
+		return HttpResponse("参数类型错误： 请输入数值"+ str(e) )
+	except MultiValueDictKeyError as e:
+		return HttpResponse("缺少参数: "+ str(e) )
+	except Exception as e:
+		print type(e)
+		return HttpResponse("异常错误："+ str(e) )
+
 
 # 采用 /add/3/4/ 这样的网址的方式
 # urls.pyurl(r'^add/(\d+)/(\d+)/$', 'learn.views.add2', name='add2'),

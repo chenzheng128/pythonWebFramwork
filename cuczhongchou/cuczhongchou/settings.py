@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Django settings for cuczhongchou project.
 
@@ -23,7 +24,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '1w2c%*2$4spl^sab_2dos!se3p5nhi!l*0m-*3ace9bg-%lio8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+#开发环境使用
 DEBUG = True
+#生产环境使用
+#DEBUG = False
 
 ALLOWED_HOSTS = []
 
