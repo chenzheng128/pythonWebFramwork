@@ -10,3 +10,4 @@ git checkout master
 
 python manage.py runserver
 
+##step02: add line in step02
