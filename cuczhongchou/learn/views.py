@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
+from django.core.urlresolvers import reverse
 
 # Create your views here.
 from django.http import HttpResponse
@@ -28,4 +29,10 @@ def add(request):
 # urls.pyurl(r'^add/(\d+)/(\d+)/$', 'learn.views.add2', name='add2'),
 def add2(request, a , b):
     c = int(a)+int(b)
-    return HttpResponse("从/add/3/4/ 网址的方式 读取参数:" +"a+b= " + str(c))
+    thisUrl=reverse('add2', args=(a,b));
+    return HttpResponse(
+    	u"""
+    	<br>/add/3/4/ 网址的方式 读取参数: a+b= %d
+    	<br> %s       网址的方式 读取参数: a+b= %d ; (网址由 reverse('add2', args=(a,b)) 函数生成)
+
+    	""" % (c, thisUrl, c ))
