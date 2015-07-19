@@ -21,8 +21,8 @@ git checkout master
 python manage.py runserver
 ```
 
-##step02:
-REF: Django 视图与网址 http://www.ziqiangxuetang.com/django/django-views-urls.html
+##step02: Django 视图与网址
+REF:  http://www.ziqiangxuetang.com/django/django-views-urls.html
 
 这里完成的工作包括
 * 新建一个应用(app), 名称叫 learn
@@ -33,3 +33,9 @@ REF: Django 视图与网址 http://www.ziqiangxuetang.com/django/django-views-ur
 git checkout step02  		#开始实验
 git checkout step02-done  	#完成效果
 ```
+##step03: Django视图与网址进阶
+REF: http://www.ziqiangxuetang.com/django/django-views-urls2.html
+
+这里完成的工作包括
+* 使用参数  在网页上读取参数，在 add add2 函数中做加减法处理
+* 使用reverse()作反向解析(映射关系定义在urls.py中)。 将函数add2() 解析至真正的网站 add///;

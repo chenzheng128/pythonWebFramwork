@@ -4,5 +4,28 @@ from django.shortcuts import render
 # Create your views here.
 from django.http import HttpResponse
  
+#step02 默认首页
 def index(request):
-    return HttpResponse(u"欢迎光临 传媒众筹网!")
+
+    return HttpResponse(u'''欢迎光临 传媒众筹网! 
+    	<br>
+    	<a href="./add/?a=4&b=5">add 处理参数方式1</a> 
+    	<br>
+    	<a href="./add/3/4/">add2 处理参数方式2</a> 
+
+    	''')
+
+#step03 处理add; 
+# step03 Examples: 从/add/?a=4&b=5 读取参数
+# urls.py url(r'^add/$', 'learn.views.add', name='add'), 
+def add(request):
+    a = request.GET['a']
+    b = request.GET['b']
+    c = int(a)+int(b)
+    return HttpResponse("从/add/?a=4&b=5 读取参数:" + "a+b= " + str(c))
+
+# 采用 /add/3/4/ 这样的网址的方式
+# urls.pyurl(r'^add/(\d+)/(\d+)/$', 'learn.views.add2', name='add2'),
+def add2(request, a , b):
+    c = int(a)+int(b)
+    return HttpResponse("从/add/3/4/ 网址的方式 读取参数:" +"a+b= " + str(c))
