@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """cuczhongchou URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -17,5 +19,10 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 urlpatterns = [
+
+ 	# Examples: 增加learn 应用中的 views.py 模块 中的 index(request) 方法
+    url(r'^$', 'learn.views.index', name='home'),# Notice this line
+    # url(r'^blog/', include('blog.urls')),
+
     url(r'^admin/', include(admin.site.urls)),
 ]
