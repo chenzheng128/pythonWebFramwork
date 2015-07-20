@@ -52,6 +52,10 @@ def add2(request, a , b):
 
     	""" % (c, thisUrl, c ))
 
-def step04(request):
+def step04a(request):
 	#return HttpResponse("默认空页面");
     return render(request, 'home.html')
+
+def step04b(request):
+	#return HttpResponse("默认空页面");
+    return render(request, 'base_extend.html')
