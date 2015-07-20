@@ -34,5 +34,7 @@ urlpatterns = [
 
     url(r'^step04b/$', 'learn.views.step04b', name='learnStep04b'),# Notice this line
 
+    url(r'^step05/$', 'learn.views.step05', name='learnStep05'),# Notice this line
+
     url(r'^admin/', include(admin.site.urls)),
 ]
