@@ -68,7 +68,9 @@ git checkout step04-done  	#完成效果
 ##step05: Django 模型（数据库）
 REF: http://www.ziqiangxuetang.com/django/django-models.html
 
-注意：这里代码的完成效果都是在learn app中完成的，而不是文章中的 people app, 所以所有的 people应修改为learn, 例如 learn.models 而不是 people.models; 
+注意：
+* 自强学堂的链接不正确，所以本章的内容提前了，但是不影响，各章的内容是都是相对独立的。
+* 这里代码的完成效果都是在learn app中完成的，而不是文章中的 people app, 所以所有的 people应修改为learn, 例如 learn.models 而不是 people.models; 
 
 这里完成的工作包括
 * 创建person持久化类  (@models.py)
@@ -80,4 +82,23 @@ REF: http://www.ziqiangxuetang.com/django/django-models.html
 git checkout step05  		#开始实验
 git checkout step05-done  	#完成效果
 ```
+
+
+##step06: Django 模板进阶
+REF: http://www.ziqiangxuetang.com/django/django-template2.html
+
+注意：
+* 自强学堂的链接不正确，所以本章的内容提前了，但是不影响，各章的内容是都是相对独立的。
+* 这里代码的完成效果都是在learn app中完成的，而不是文章中的 people app, 所以所有的 people应修改为learn, 例如 learn.models 而不是 people.models; 
+
+这里完成的工作包括
+* /step06a/ 在模板 step06a.html 中显示一个变量(动态时间）信息
+
+
+```
+git checkout step06         #开始实验
+git checkout step06-done    #完成效果
+```
+
+
 

@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import time
+
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
 
@@ -77,3 +79,14 @@ def step05(request):
     template = loader.get_template('person_list.html')
     html = template.render(Context({'person_list': Person.objects.all()}))
     return HttpResponse(html)
+
+
+"""
+* /step06a/ 在模板 step06a.html 中显示变量信息
+"""
+
+ 
+def step06a(request):
+    timeStr = time.strftime('%Y-%m-%d %H:%M:%S')
+    someVar = u"当前时间为" + timeStr
+    return render(request, 'step06a.html', {'myVar': someVar})
