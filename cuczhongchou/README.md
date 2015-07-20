@@ -94,6 +94,8 @@ REF: http://www.ziqiangxuetang.com/django/django-template2.html
 这里完成的工作包括
 * /step06a/ 显示一个变量(动态时间）信息在模板(step06a.html)中
 * /step06b/ 显示List列表(for语法）信息在模板(step06b.html)中
+* /step06c/ 显示Dict字典(for语法）信息在模板(step06c.html)中
+* /step06d/ 条件判断显示(if 语法）    在模板(step06d.html)中
 
 ```
 git checkout step06         #开始实验

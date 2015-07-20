@@ -108,3 +108,15 @@ def step06b(request):
 def step06c(request):
     info_dict = {'site': u'自强学堂', 'content': u'各种IT技术教程'}
     return render(request, 'step06c.html', {'info_dict': info_dict})
+
+
+"""
+* /step06d/ 条件判断显示(if 语法）    在模板(step06d.html)中
+"""
+
+def step06d(request):
+    List = map(str, range(100))# 一个长度为100的 List
+    info_dict={}
+    for x in range(10):              # 一个长度为10的 Dict              
+        info_dict['key'+str(x)]=x 
+    return render(request, 'step06d.html', {'List': List, 'info_dict': info_dict})
