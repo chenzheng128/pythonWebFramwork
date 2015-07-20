@@ -20,15 +20,17 @@ from django.contrib import admin
 
 urlpatterns = [
 
- 	# step02 Examples: 增加learn 应用中的 views.py 模块 中的 index(request) 方法
-    url(r'^$', 'learn.views.index', name='home'),# Notice this line
+ 	# step02 Examples: 增加learn 应用中的 views.py 模块 中的 simple(request) 方法
+    url(r'^step02/$', 'learn.views.step02', name='step02'),# Notice this line
     
     # step03 Examples: 从/add/?a=4&b=5 读取参数
     url(r'^add/$', 'learn.views.add', name='add'), # 注意修改了这一行
 
     # 采用 /add/3/4/ 这样的网址的方式
     url(r'^add/(\d+)/(\d+)/$', 'learn.views.add2', name='add2'),
-    
+
+    # step04 Examples: 增加learn 应用中的 views.py 模块 中的 index(request) 方法
+    url(r'^$', 'learn.views.step04', name='step04'),# Notice this line
 
     url(r'^admin/', include(admin.site.urls)),
 ]

@@ -10,7 +10,7 @@ from exceptions import ValueError
 from django.utils.datastructures import MultiValueDictKeyError
  
 #step02 默认首页
-def index(request):
+def step02(request):
 
     return HttpResponse(u'''欢迎光临 传媒众筹网! 
     	<br>
@@ -51,3 +51,6 @@ def add2(request, a , b):
     	<br> %s       网址的方式 读取参数: a+b= %d ; (网址由 reverse('add2', args=(a,b)) 函数生成)
 
     	""" % (c, thisUrl, c ))
+
+def step04(request):
+	return HttpResponse("默认空页面");
