@@ -30,7 +30,9 @@ urlpatterns = [
     url(r'^add/(\d+)/(\d+)/$', 'learn.views.add2', name='add2'),
 
     # step04 Examples: 增加learn 应用中的 views.py 模块 中的 index(request) 方法
-    url(r'^$', 'learn.views.step04', name='learnStep04'),# Notice this line
+    url(r'^step04a/$', 'learn.views.step04a', name='learnStep04a'),# Notice this line
+
+    url(r'^step04b/$', 'learn.views.step04b', name='learnStep04b'),# Notice this line
 
     url(r'^admin/', include(admin.site.urls)),
 ]
