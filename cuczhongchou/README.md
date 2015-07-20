@@ -42,3 +42,21 @@ REF: http://www.ziqiangxuetang.com/django/django-views-urls2.html
 * 使用参数  在网页上读取参数，在 add add2 函数中做加减法处理
 * 使用reverse()作反向解析(映射关系定义在urls.py中)。 将函数add2() 解析至真正的网站 add///;
 * 增加参数异常处理（补充内容）
+
+
+```
+git checkout step03  		#开始实验
+git checkout step03-done  	#完成效果
+```
+
+##step04: Django 模板
+
+
+这里完成的工作包括
+* 使用渲染模板
+* 通用的部分模板，比如 导航，底部，访问统计代码
+
+```
+git checkout step04  		#开始实验
+git checkout step04-done  	#完成效果
+```
