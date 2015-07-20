@@ -90,3 +90,13 @@ def step06a(request):
     timeStr = time.strftime('%Y-%m-%d %H:%M:%S')
     someVar = u"当前时间为" + timeStr
     return render(request, 'step06a.html', {'myVar': someVar})
+
+
+"""
+* /step06b/ 显示List列表(for语法）信息在模板(step06b.html)中
+"""
+
+
+def step06b(request):
+    TutorialList = ["HTML", "CSS", "jQuery", "Python", "Django"]
+    return render(request, 'step06b.html', {'TutorialList': TutorialList})

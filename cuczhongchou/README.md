@@ -92,8 +92,8 @@ REF: http://www.ziqiangxuetang.com/django/django-template2.html
 * 这里代码的完成效果都是在learn app中完成的，而不是文章中的 people app, 所以所有的 people应修改为learn, 例如 learn.models 而不是 people.models; 
 
 这里完成的工作包括
-* /step06a/ 在模板 step06a.html 中显示一个变量(动态时间）信息
-
+* /step06a/ 显示一个变量(动态时间）信息在模板(step06a.html)中
+* /step06b/ 显示List列表(for语法）信息在模板(step06b.html)中
 
 ```
 git checkout step06         #开始实验
