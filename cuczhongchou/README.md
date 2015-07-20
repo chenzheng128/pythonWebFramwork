@@ -1,6 +1,8 @@
 #python django 示范项目
 
-使用django框架 完成一个众筹网站
+使用django框架 完成一个众筹网站所需的技术原型（prototype)
+
+主要参考学堂在线课程， 并增加补充内容；在文档以及commit中标记为（补充内容）
 
 用git管理学习代码(REAMDE文档保持在master中更新，其他代码保存在step0x【本章起始代码，便于开始此章实验】, step0x-done 【本章完成代码，便于查看本章效果】) (
 
@@ -39,3 +41,4 @@ REF: http://www.ziqiangxuetang.com/django/django-views-urls2.html
 这里完成的工作包括
 * 使用参数  在网页上读取参数，在 add add2 函数中做加减法处理
 * 使用reverse()作反向解析(映射关系定义在urls.py中)。 将函数add2() 解析至真正的网站 add///;
+* 增加参数异常处理（补充内容）
