@@ -100,3 +100,11 @@ def step06a(request):
 def step06b(request):
     TutorialList = ["HTML", "CSS", "jQuery", "Python", "Django"]
     return render(request, 'step06b.html', {'TutorialList': TutorialList})
+
+"""
+* /step06c/ 显示Dict字典(for语法）信息在模板(step06c.html)中
+"""
+
+def step06c(request):
+    info_dict = {'site': u'自强学堂', 'content': u'各种IT技术教程'}
+    return render(request, 'step06c.html', {'info_dict': info_dict})
