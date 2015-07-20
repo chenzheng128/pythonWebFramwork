@@ -53,4 +53,5 @@ def add2(request, a , b):
     	""" % (c, thisUrl, c ))
 
 def step04(request):
-	return HttpResponse("默认空页面");
+	#return HttpResponse("默认空页面");
+    return render(request, 'home.html')
