@@ -8,7 +8,11 @@
 
 {% include 'nav.html' %}
 
-<h2>此页面模板base_extend.html 从 base.html 继承下来 </h2>
+<h2>
+{% block head_text %}
+此页面模板base_extend.html 从 base.html 继承下来
+{% endblock %}
+</h2>
 
 {% block content %}
 <div>这里是默认内容，所有继承自这个模板的，如果不覆盖就显示这里的默认内容。</div>
