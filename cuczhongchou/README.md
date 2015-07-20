@@ -63,3 +63,21 @@ git checkout step04-done  	#完成效果
 ```
 
 查看访问效果不再使用首页链接，而是使用 http://localhost:8000/step04b/ 这样的方式，举例链接可以查看 urls.py
+
+
+##step05: Django 模型（数据库）
+REF: http://www.ziqiangxuetang.com/django/django-models.html
+
+注意：这里代码的完成效果都是在learn app中完成的，而不是文章中的 people app, 所以所有的 people应修改为learn, 例如 learn.models 而不是 people.models; 
+
+这里完成的工作包括
+* 创建person持久化类  (@models.py)
+* 同步类与自动创建数据库person表格	./manage.py makemigrate | migrate
+* 在shell中完成person创建
+* 在 /step05/ 模板中显示person list（补充内容）
+
+```
+git checkout step05  		#开始实验
+git checkout step05-done  	#完成效果
+```
+
