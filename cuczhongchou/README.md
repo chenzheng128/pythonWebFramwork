@@ -56,7 +56,10 @@ git checkout step03-done  	#完成效果
 * 使用渲染模板
 * 通用的部分模板，比如 导航，底部，访问统计代码
 
+
 ```
 git checkout step04  		#开始实验
 git checkout step04-done  	#完成效果
 ```
+
+查看访问效果不再使用首页链接，而是使用 http://localhost:8000/step04b/ 这样的方式，举例链接可以查看 urls.py
