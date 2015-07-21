@@ -103,4 +103,20 @@ git checkout step06-done    #完成效果
 ```
 
 
+##step07: Django渲染json到模板
+REF: http://www.ziqiangxuetang.com/django/django-json-templates.html
+
+注意：
+* 这里代码的完成效果都是在learn app中完成的，而不是文章中的 xxxx app, 所以所有的 xxxx应修改为learn, 例如 learn.models 而不是 xxxx.models; 
+* 所有代码中用到的home.html 都被修改为 step07.html
+
+这里完成的工作包括
+* /step07/ python对象(List,Dict)转换为json在模板中加载
+
+```
+git checkout step07         #开始实验
+git checkout step07-done    #完成效果
+```
+
+
 

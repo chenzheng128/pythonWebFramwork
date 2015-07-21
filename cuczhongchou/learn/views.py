@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import time
+import json
 
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
@@ -120,3 +121,16 @@ def step06d(request):
     for x in range(10):              # 一个长度为10的 Dict              
         info_dict['key'+str(x)]=x 
     return render(request, 'step06d.html', {'List': List, 'info_dict': info_dict})
+
+
+"""
+* /step07/ python对象(List,Dict)转换为json在模板中加载
+"""
+
+def step07(request):
+    List = ['list1', 'list2', 3, 5, 7]
+    Dict = {'site': 'nic.cuc.edu.cn', 'author': 'zhchen', 'country':'中国'}
+    return render(request, 'step07.html', {
+            'List': json.dumps(List),
+            'Dict': json.dumps(Dict)
+        })
