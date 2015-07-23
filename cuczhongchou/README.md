@@ -6,7 +6,10 @@
 
 用git管理学习代码(REAMDE文档保持在master中更新，其他代码保存在step0x【本章起始代码，便于开始此章实验】, step0x-done 【本章完成代码，便于查看本章效果】) (
 
-为支持中文，所有的.py文件应在第一行中加入utf-8编码, 如下所示
+注意：
+* 这里代码的完成效果都是在learn app中完成的，而不是文章中的 xxxx app, 所以所有的 xxxx应修改为learn, 例如 learn.models 而不是 xxxx.models; 
+* 所有代码中用到的home.html 都被修改为 step07.html
+* 为支持中文，所有的.py文件应在第一行中加入utf-8编码, 如下所示
 ```
 # -*- coding: utf-8 -*-
 ```
@@ -88,7 +91,6 @@ git checkout step05-done  	#完成效果
 REF: http://www.ziqiangxuetang.com/django/django-template2.html
 
 注意：
-* 自强学堂的链接不正确，所以本章的内容提前了，但是不影响，各章的内容是都是相对独立的。
 * 这里代码的完成效果都是在learn app中完成的，而不是文章中的 people app, 所以所有的 people应修改为learn, 例如 learn.models 而不是 people.models; 
 
 这里完成的工作包括
@@ -117,6 +119,26 @@ REF: http://www.ziqiangxuetang.com/django/django-json-templates.html
 git checkout step07         #开始实验
 git checkout step07-done    #完成效果
 ```
+
+##暂时跳过的章节
+* Django 自定义Field
+* Django QuerySet API
+
+##step08: Django 后台
+REF: http://www.ziqiangxuetang.com/django/django-admin.html
+
+这里完成的工作包括
+* /admin/ 激活django 后台管理 Person 类， 进行持久化; 用户名:密码  admin:admin
+* 改进：显示filed,
+* 改进：搜索
+* 改进：筛选
+
+```
+git checkout step08         #开始实验
+git checkout step08-done    #完成效果
+```
+
+
 
 
 
