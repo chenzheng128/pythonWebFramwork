@@ -175,3 +175,9 @@ django 1.8 已经Debug模式下已经默认支持静态文件在App /static/ 目
 可通过下面链接来访问： http://localhost:8000/static/screen.png
 
 
+##step11: Put it Together(补充内容)
+
+这里完成的工作包括
+* /step11/ 引入静态页面（含 图片 css 内容等）
+* /step11/ 将artice 转为 json
+* /step11/ 将json 在页面上展示
