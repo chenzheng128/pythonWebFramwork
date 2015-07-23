@@ -131,12 +131,10 @@ REF: http://www.ziqiangxuetang.com/django/django-admin.html
 
 这里完成的工作包括
 * /admin/ 激活django 后台管理 Person 类， 进行持久化; 用户名:密码  admin:admin
-* 激活 Article 类管理
+* 增加Article管理与列表显示
     - ./manage.py makemigrations (自动生成数据库映射文件 ./migrate/0002_article.py)
     - ./manage.py migrate (创建数据表)
-* 改进：显示filed（Person类）
-* 改进：搜索
-* 改进：筛选
+* 改进：增加搜索, 筛选 (Article类)
 
 ```
 git checkout step08         #开始实验

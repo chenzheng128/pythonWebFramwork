@@ -17,7 +17,12 @@ admin.site.register(Person, PersonAdmin)
 
 # 在列表显示 article 字段
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ('title','pub_date','update_time', )
+    list_display = ('title','pub_date','update_time',)
+    #* 改进：增加后台字段搜索
+    search_fields = ('title', 'content',)
+
+    #筛选功能
+    list_filter = ('title', 'pub_date')
 
 #* 激活 Article 类管理
 admin.site.register(Article,ArticleAdmin)
