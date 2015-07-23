@@ -28,3 +28,14 @@ class Article(models.Model):
  
     pub_date = models.DateTimeField(u'发表时间', auto_now_add=True, editable = True)
     update_time = models.DateTimeField(u'更新时间',auto_now=True, null=True)
+
+
+    #自定义简要标题，仅显示前50个字符
+    def contentShortFunc(self):
+    	if len(self.content)>50:
+    		return self.content[:50]
+    	else:
+        	return self.content
+    contentShortFunc.short_description = "标题（简要）"
+ 
+    contentShort = property(contentShortFunc)
