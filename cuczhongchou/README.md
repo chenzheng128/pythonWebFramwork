@@ -146,6 +146,15 @@ git checkout step08         #开始实验
 git checkout step08-done    #完成效果
 ```
 
+##step09: Django 表单
+REF: http://www.ziqiangxuetang.com/django/django-forms.html
+
+这里完成的工作包括
+* /step09/ 使用 Django 的 表单 (forms)
+```
+git checkout step09         #开始实验
+git checkout step10         #完成效果
+```
 
 
 
