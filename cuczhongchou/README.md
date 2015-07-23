@@ -134,7 +134,12 @@ REF: http://www.ziqiangxuetang.com/django/django-admin.html
 * 增加Article管理与列表显示
     - ./manage.py makemigrations (自动生成数据库映射文件 ./migrate/0002_article.py)
     - ./manage.py migrate (创建数据表)
-* 改进：增加搜索, 筛选 (Article类)
+* 改进：增加搜索, 筛选 
+* 改进：自定义Field 50个字符的简要标题显示 (Article类) 
+* 跳过暂未实现的内容(后台目前仅设置一个用户，完成内容编辑即可，不需要太复杂逻辑), 包括： 
+    - 定制加载的列表, 根据不同的人显示不同的内容列表
+    - 定制搜索功能
+    - 修改保存时的一些操作,  删除时做一些处理
 
 ```
 git checkout step08         #开始实验
