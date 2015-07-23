@@ -76,8 +76,10 @@ REF: http://www.ziqiangxuetang.com/django/django-models.html
 * 这里代码的完成效果都是在learn app中完成的，而不是文章中的 people app, 所以所有的 people应修改为learn, 例如 learn.models 而不是 people.models; 
 
 这里完成的工作包括
-* 创建person持久化类  (@models.py)
-* 同步类与自动创建数据库person表格	./manage.py makemigrate | migrate
+* 创建person持久化类  (models.py)
+* 同步类与自动创建数据库person表格	
+    - ./manage.py makemigrations (自动生成数据库映射文件 ./migrate/0001_person.py)
+    - ./manage.py migrate (创建数据表)
 * 在shell中完成person创建
 * 在 /step05/ 模板中显示person list（补充内容）
 
@@ -129,7 +131,10 @@ REF: http://www.ziqiangxuetang.com/django/django-admin.html
 
 这里完成的工作包括
 * /admin/ 激活django 后台管理 Person 类， 进行持久化; 用户名:密码  admin:admin
-* 改进：显示filed,
+* 激活 Article 类管理
+    - ./manage.py makemigrations (自动生成数据库映射文件 ./migrate/0002_article.py)
+    - ./manage.py migrate (创建数据表)
+* 改进：显示filed（Person类）
 * 改进：搜索
 * 改进：筛选
 
