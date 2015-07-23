@@ -161,6 +161,17 @@ git checkout step09         #开始实验
 git checkout step10         #完成效果
 ```
 
+##暂时跳过的章节
+* Django 配置 
 
+##step10: Django 静态文件
+REF: http://www.ziqiangxuetang.com/django/django-static-files.html
+
+django 1.8 已经Debug模式下已经默认支持静态文件在App /static/ 目录只要创建该目录即可
+
+这里完成的工作包括
+* 建立/static/文件夹 增加测试png文件
+* 
+可通过下面链接来访问： http://localhost:8000/static/screen.png
 
 
