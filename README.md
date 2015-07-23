@@ -3,27 +3,22 @@
 
 Python的web框架： https://wiki.python.org/moin/WebFrameworks
 
-
-##web.py
-
-REF: web.py 0.3 新手指南 http://webpy.org/tutorial3.zh-cn
-
 ##json新闻渲染（前端）
 使用json数据（网易新闻）生成新闻页面
 
 代码位置
-'''
+```
 cd jsonNews
-'''
+```
 
 ##django 众筹网站(前后端)
 
 REF: Django 基础教程 (自强学堂 涂伟忠 ) http://www.ziqiangxuetang.com/django/django-tutorial.html
 
 代码位置
-'''
+```
 cd cuczhongchou
-'''
+```
 
 用git管理学习代码(REAMDE文档保持在master中更新，其他代码保存在step0x【本章起始代码，便于开始此章实验】, step0x-done 【本章完成代码，便于查看效果】) (
 
@@ -41,3 +36,7 @@ cd cuczhongchou
 ```
 
 
+
+##web.py
+
+REF: web.py 0.3 新手指南 http://webpy.org/tutorial3.zh-cn
