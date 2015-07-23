@@ -149,8 +149,13 @@ git checkout step08-done    #完成效果
 ##step09: Django 表单
 REF: http://www.ziqiangxuetang.com/django/django-forms.html
 
+这个表单比较重（已经生成了table标签）。可以用在一些快速开发的场景中，但不一定适合定制页面开发。
+
 这里完成的工作包括
 * /step09/ 使用 Django 的 表单 (forms)
+
+作业：使用 django 表单增加新文章 (Article)。 （完成思路： 设置article 字段表单，提交到view中，使用 Article.model 新建文章。）
+
 ```
 git checkout step09         #开始实验
 git checkout step10         #完成效果
