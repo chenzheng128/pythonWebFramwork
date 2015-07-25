@@ -39,3 +39,13 @@ class Article(models.Model):
     contentShortFunc.short_description = "标题（简要）"
  
     contentShort = property(contentShortFunc)
+
+
+
+"""
+#创建一个Student类，定义两个字段 姓名，年龄
+"""
+class Student(models.Model):
+    name = models.CharField(u'姓名', max_length=30)
+    grade = models.IntegerField(u'年级')
+

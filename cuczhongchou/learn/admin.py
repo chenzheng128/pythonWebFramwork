@@ -3,7 +3,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Person, Article
+from .models import Person, Article, Student
 
 
 #* 改进：显示filed（Person类）
@@ -28,3 +28,23 @@ class ArticleAdmin(admin.ModelAdmin):
 
 #* 激活 Article 类管理
 admin.site.register(Article,ArticleAdmin)
+
+
+#Student标准激活
+#admin.site.register(Student)
+
+#Student自定义管理
+
+# 在列表显示 article 字段
+class StudentAdmin(admin.ModelAdmin):
+
+	#后台 列表显示字段 
+    list_display = ('name', 'grade', )
+    #* 改进：增加后台字段搜索
+    search_fields = ('name', 'grade',)
+
+    #筛选功能
+    list_filter = ('name', 'grade')
+
+#* 激活 Article 类管理
+admin.site.register(Student,StudentAdmin)
