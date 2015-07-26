@@ -1,5 +1,9 @@
+
 #Hbuilder project
 .project
+#pycharm project
+.idea
+prote
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -102,3 +106,5 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+.project
