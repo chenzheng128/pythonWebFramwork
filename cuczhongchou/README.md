@@ -14,6 +14,15 @@
 # -*- coding: utf-8 -*-
 ```
 
+支持virtualenv环境运行，运行方法
+```
+virtualenv venv
+source venv/bin/active
+pip install -r requirements.txt
+cd DJANGO_ROOT
+python manage.py runserver
+```
+
 
 ##step01: 运行django的server代码
 REF: Django 基本命令 http://www.ziqiangxuetang.com/django/django-basic.html

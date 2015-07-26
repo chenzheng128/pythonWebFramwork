@@ -1,3 +1,5 @@
+#Virtualenv
+venv
 
 #Hbuilder project
 .project
@@ -108,3 +110,5 @@ $RECYCLE.BIN/
 *.lnk
 
 .project
+
+venv/bin/activate
