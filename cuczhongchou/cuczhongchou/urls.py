@@ -23,11 +23,10 @@ import d01_first_steps.views
 urlpatterns = [
 
 
-    ### doclearn 官方 overview https://docs.djangoproject.com/en/1.8/intro/overview/
-    url(r'^01/articles/([0-9]{4})/$', d01_first_steps.views.year_archive),
-    # url(r'^articles/([0-9]{4})/([0-9]{2})/$', views.month_archive),
-    # url(r'^articles/([0-9]{4})/([0-9]{2})/([0-9]+)/$', views.article_detail),
-    url(r'^01/snoop/$', d01_first_steps.views.snoop),
+    ### d01_first_steps 官方 overview https://docs.djangoproject.com/en/1.8/intro/overview/
+
+    ### 使用 include 和 namespace file:///Users/chen/coding/documentations/django-docs-1.8-en/intro/tutorial03.html
+    url(r'^d01/', include('d01_first_steps.urls' , namespace="polls") ) ,
 
     ### learn 自强学社
 
