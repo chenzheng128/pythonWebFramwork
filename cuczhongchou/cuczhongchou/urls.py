@@ -18,7 +18,18 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
+from doclearn import views
+
 urlpatterns = [
+
+
+    ### doclearn 官方 overview https://docs.djangoproject.com/en/1.8/intro/overview/
+    url(r'^articles/([0-9]{4})/$', views.year_archive),
+    # url(r'^articles/([0-9]{4})/([0-9]{2})/$', views.month_archive),
+    # url(r'^articles/([0-9]{4})/([0-9]{2})/([0-9]+)/$', views.article_detail),
+    url(r'^snoop/$', views.snoop),
+
+    ### learn 自强学社
 
  	# step02 Examples: 增加learn 应用中的 views.py 模块 中的 simple(request) 方法
     url(r'^step02/$', 'learn.views.step02', name='step02'),# Notice this line
