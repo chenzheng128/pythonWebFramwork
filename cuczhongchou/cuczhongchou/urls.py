@@ -18,16 +18,16 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
-from doclearn import views
+import d01_first_steps.views
 
 urlpatterns = [
 
 
     ### doclearn 官方 overview https://docs.djangoproject.com/en/1.8/intro/overview/
-    url(r'^articles/([0-9]{4})/$', views.year_archive),
+    url(r'^01/articles/([0-9]{4})/$', d01_first_steps.views.year_archive),
     # url(r'^articles/([0-9]{4})/([0-9]{2})/$', views.month_archive),
     # url(r'^articles/([0-9]{4})/([0-9]{2})/([0-9]+)/$', views.article_detail),
-    url(r'^snoop/$', views.snoop),
+    url(r'^01/snoop/$', d01_first_steps.views.snoop),
 
     ### learn 自强学社
 

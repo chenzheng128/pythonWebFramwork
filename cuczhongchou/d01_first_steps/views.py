@@ -4,7 +4,7 @@ from django.http.response import HttpResponse
 from django.core.handlers.wsgi import WSGIRequest
 from django.shortcuts import render
 
-from doclearn.models import Article
+from .models import Article
 
 
 

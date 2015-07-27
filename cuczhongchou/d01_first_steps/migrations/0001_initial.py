@@ -29,6 +29,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='article',
             name='reporter',
-            field=models.ForeignKey(to='doclearn.Reporter'),
+            field=models.ForeignKey(to='Reporter'),
         ),
     ]
