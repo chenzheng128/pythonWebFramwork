@@ -36,6 +36,17 @@ cd cuczhongchou
 ```
 
 
+##django 入门
+
+完成了官方代码 1.8 中的 frist_step内容
+
+REF: https://docs.djangoproject.com/en/1.8/
+
+代码位置
+```
+cd cuczhongchou/d01_first_step
+```
+
 
 ##web.py
 
