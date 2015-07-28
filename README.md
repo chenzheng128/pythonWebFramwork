@@ -36,16 +36,19 @@ cd cuczhongchou
 ```
 
 
-##django 入门
+##django 官方文档 入门
 
-完成了官方代码 1.8 中的 frist_step内容
+完成了官方文档 1.8 (https://docs.djangoproject.com/en/1.8/) 中的 frist_step内容, 包含两部分
+* Overview (类似 QuickStart) 中采用的Model是 Report记者, Article文章
+* Tutorial 6j节内容设计Model为 Poll投票, Question问题-Choice选择, (无前台)主要包括模型的创建, 模板, 测试 (未完全通过, 考虑更换为mysql数据库) 等. (前台地址: http://localhost:8000/d01/ )
 
-REF: https://docs.djangoproject.com/en/1.8/
+在汉化问题上, 参考了  django 博客汉化方法 (http://lishiguang.iteye.com/blog/1328986), 引入了一些博客Model, 包括 Category文章分类, Tag文章标签, Post发布文章等 
 
 代码位置
 ```
 cd cuczhongchou/d01_first_step
 ```
+
 
 
 ##web.py

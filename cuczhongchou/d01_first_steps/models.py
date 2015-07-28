@@ -9,7 +9,11 @@ from django.utils import timezone
     定义Default值需要吗? 不一定 NULL (没填) 作为未填入的值 和 '' (填为空) 是不一样的.
 """
 
+
 class Reporter(models.Model):
+    """
+    新闻记者
+    """
     full_name = models.CharField(max_length=70)
 
     def __unicode__(self):  # __unicode__ on Python 2
@@ -17,6 +21,9 @@ class Reporter(models.Model):
 
 
 class Article(models.Model):
+    """
+    文章
+    """
     pub_date = models.DateField()  # 日期型
     headline = models.CharField(max_length=200)
     content = models.TextField()  # TEXT文本型
@@ -156,6 +163,7 @@ class Choice(models.Model):
 """
 # django 博客汉化方法 http://lishiguang.iteye.com/blog/1328986
 """
+
 
 class Category(models.Model):
     """
