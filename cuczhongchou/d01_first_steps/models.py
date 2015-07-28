@@ -4,6 +4,10 @@ import datetime
 from django.db import models
 from django.utils import timezone
 
+"""
+    所有的CharField都应该定义max_length, 便于除了SQLite之外的数据库支持
+    定义Default值需要吗? 不一定 NULL (没填) 作为未填入的值 和 '' (填为空) 是不一样的.
+"""
 
 class Reporter(models.Model):
     full_name = models.CharField(max_length=70)
@@ -123,7 +127,9 @@ class Question(models.Model):
 
     # 增加自定义方法
     def was_published_recently(self):
-        return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+        now = timezone.now()
+        #return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+        return now - datetime.timedelta(days=1) <= self.pub_date <= now
 
     was_published_recently.admin_order_field = 'pub_date'
     was_published_recently.boolean = True       #生成可爱的小图标
