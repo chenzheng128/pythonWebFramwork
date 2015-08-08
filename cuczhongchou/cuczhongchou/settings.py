@@ -35,6 +35,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    ##这句话可以激活/关闭 admin 后台的 bootstrapped 风格
+    'django_admin_bootstrapped',
+    ##
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -112,8 +115,10 @@ default-character-set = utf8
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-#LANGUAGE_CODE = 'en-us'
-LANGUAGE_CODE = 'zh-hans'
+# admin 英文后台 bootstrap 风格更协调一些
+LANGUAGE_CODE = 'en-us'
+# admin中文后台 TODO 将admin后台的字体缩小
+#LANGUAGE_CODE = 'zh-hans'
 
 TIME_ZONE = 'UTC'
 
