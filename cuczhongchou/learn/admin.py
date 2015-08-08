@@ -48,3 +48,5 @@ class StudentAdmin(admin.ModelAdmin):
 
 #* 激活 Article 类管理
 admin.site.register(Student,StudentAdmin)
+
+

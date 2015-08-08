@@ -42,9 +42,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
-    #'learn',    #自强学社文档学习
-    #'d01_first_steps', #开始官方文档学习
-    'crowdfunding', # 众筹
+    'learn',    #自强学社文档学习
+    'd01_first_steps', #开始官方文档学习
+    #'crowdfunding', # 众筹
 )
 
 MIDDLEWARE_CLASSES = (
