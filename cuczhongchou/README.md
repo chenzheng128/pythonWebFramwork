@@ -2,6 +2,12 @@
 
 使用django框架 完成一个网站所需的技术原型（prototype)
 
+依赖包存在 requirements.txt中, 安装方法
+```
+pip install -r requirements.txt
+```
+
+
 
 ##2015.08.08 更新 django后台修改为bootstrap风格
 Source: https://github.com/django-admin-bootstrapped/django-admin-bootstrapped
