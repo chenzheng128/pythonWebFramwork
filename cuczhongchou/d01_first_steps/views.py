@@ -8,7 +8,7 @@ from django.shortcuts import get_object_or_404, render
 from django.views import generic
 from django.utils import timezone
 
-from .models import Article, Question, Choice
+from .models import *
 
 """
     Tutorial 03 file:///Users/chen/coding/documentations/django-docs-1.8-en/intro/tutorial03.html
@@ -126,7 +126,7 @@ class ResultsView(generic.DetailView):
 
 
 def year_archive(request, year):
-    a_list = Article.objects.filter(pub_date__year=year)
+    a_list = D01Article.objects.filter(pub_date__year=year)
     context = {'year': year, 'article_list': a_list}
     return render(request, 'd01_first_steps/year_archive.html', context)
 

@@ -5,14 +5,30 @@ from .models import *
 
 # Register your models here.
 
+
+
+"""
+d02 admin
+"""
+admin.site.register(D02Album)
+admin.site.register(D02Musician)
+
+admin.site.register(D02Person)
+admin.site.register(D02Group)
+admin.site.register(D02Membership)
+
+"""
+d01 admin overview
+"""
+
 # Overview
-admin.site.register(Article);
-admin.site.register(Reporter);
+admin.site.register(D01Article);
+admin.site.register(D01Reporter);
 
 
 
 """
-# 投票管理
+# d01 admin 投票管理
 # Tutorial polls
 # admin.site.register(Question);
 # admin.site.register(Choice);
