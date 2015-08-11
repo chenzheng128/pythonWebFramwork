@@ -2,11 +2,18 @@
 
 使用django框架 完成一个网站所需的技术原型（prototype)
 
-依赖包存在 requirements.txt中, 安装方法
+##依赖包
+项目所依赖包的描述信息 (名称与版本) 存在 requirements.txt中, 依赖包安装方法(如果网络速度慢,建议设置pip 镜像)
 ```
 pip install -r requirements.txt
 ```
 
+###pip镜像设置方法
+新建目录与文件(Windows: %HOMEPATH%/pip/pip.ini Linux: ~/.pip/pip.conf , 增加内容如下
+```
+[global]
+index-url = https://pypi.mirrors.ustc.edu.cn/simple
+```
 
 
 ##2015.08.08 更新 django后台修改为bootstrap风格
