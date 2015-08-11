@@ -1,7 +1,25 @@
 #python django 示范项目
 
-使用django框架 完成一个众筹网站所需的技术原型（prototype)
+使用django框架 完成一个网站所需的技术原型（prototype)
 
+
+##2015.08.08 更新 django后台修改为bootstrap风格
+Source: https://github.com/django-admin-bootstrapped/django-admin-bootstrapped
+* 安装:  pip install django-admin-bootstrapped
+* 在 settings.py 中激活 bootstrap 风格
+```
+INSTALLED_APPS = (
+    ##这句话可以激活/关闭 admin 后台的 bootstrapped 风格
+    'django_admin_bootstrapped',
+    ##
+    'django.contrib.admin',
+```
+* 将原有的模板文件修改为 .orig.html 屏蔽旧模板效果
+
+看看现有的后台效果怎样
+
+
+##学堂在线系列文档
 主要参考学堂在线课程， 并增加补充内容；在文档以及commit中标记为（补充内容）
 
 用git管理学习代码(REAMDE文档保持在master中更新，其他代码保存在step0x【本章起始代码，便于开始此章实验】, step0x-done 【本章完成代码，便于查看本章效果】) (
