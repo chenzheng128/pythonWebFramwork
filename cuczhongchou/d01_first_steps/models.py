@@ -5,12 +5,113 @@ from django.db import models
 from django.utils import timezone
 
 """
-    所有的CharField都应该定义max_length, 便于除了SQLite之外的数据库支持
+    Mysql所有的CharField都应该定义max_length, 便于除了SQLite之外的数据库支持
     定义Default值需要吗? 不一定 NULL (没填) 作为未填入的值 和 '' (填为空) 是不一样的.
+    Mysql 表格式修改为 utf8_bin
 """
 
 
-class Reporter(models.Model):
+
+"""
+d02 models 由于重建app会生成新的models.py文件, 不方便在pyCharm快速打开
+   因此所有的model就不新建d02(官方文档第二步的缩写 document02 ) app
+d02 (官方文档第二部分的缩写 document02 )
+    django field 类型参考:
+  有意思的 Field types:
+  https://docs.djangoproject.com/en/1.8/ref/models/fields/#model-field-types
+    AutoField
+    CommaSeparatedIntegerField
+    BooleanField(u'审核', default=False)
+    DateTimeField(u'更新时间', auto_now=True, null=True), 自动更新时间戳 auto_now_add=True
+    DurationField 持续时间
+    EmailField 电子邮件
+    FileField                       TODO
+    ImageField: 需要定义 MEDIA_ROOT, TODO
+    FilePathField
+    IPAddressField
+    GenericIPAddressField
+    PositiveIntegerField
+    URLField
+    id = models.UUIDField(u'UUID主键', primary_key=True, default=uuid.uuid4, editable=False)
+
+
+"""
+
+
+"""
+乐手 1:n 专辑(引用ForeignKey)
+"""
+
+#Entity 乐手
+class D02Musician(models.Model):
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    instrument = models.CharField(max_length=100)
+
+
+ALBUM_TYPE = (
+        ('CLA', '古典'),
+        ('POP', '现代'),
+    )
+ALBUM_TYPE_INT = (
+        (1, '摇滚'),
+        (2, '爵士'),
+    )
+
+#Entity 专辑
+class D02Album(models.Model):
+    #默认存在的id
+    #id = models.AutoField(primary_key=True)
+    artist = models.ForeignKey(D02Musician)
+    name = models.CharField(max_length=100)
+    release_date = models.DateField()
+    num_stars = models.IntegerField()
+    type_int = models.IntegerField(choices=ALBUM_TYPE_INT, null=True)
+    type = models.CharField(choices=ALBUM_TYPE, max_length=10, null=True)
+
+
+"""
+
+  Relationship fields: 关系型
+  https://docs.djangoproject.com/en/1.8/ref/models/fields/#module-django.db.models.fields.related
+    ForeignKey  many-to-one , 引用其他app model时加app前缀, 如 manufacturer = models.ForeignKey('production.Manufacturer')
+    ManyToManyField
+        class Person(models.Model):
+        friends = models.ManyToManyField("self", verbose_name="好友们") #多对多的递归关系
+    OneToOneField 类似于ForeignKey 多用在继承中
+
+  d02 列子 extra-fields-on-many-to-many-relationships
+  d02 关系映射 https://docs.djangoproject.com/en/1.8/topics/db/models/#extra-fields-on-many-to-many-relationships
+"""
+
+class D02Person(models.Model):
+    name = models.CharField(max_length=128)
+
+    def __str__(self):              # __unicode__ on Python 2
+        return self.name
+
+class D02Group(models.Model):
+    name = models.CharField(max_length=128)
+    members = models.ManyToManyField(D02Person, through='D02Membership')
+
+    def __str__(self):              # __unicode__ on Python 2
+        return self.name
+
+class D02Membership(models.Model):
+    person = models.ForeignKey(D02Person)
+    group = models.ForeignKey(D02Group)
+    date_joined = models.DateField()
+    invite_reason = models.CharField(max_length=64)
+    def __str__(self):              # __unicode__ on Python 2
+        return self.person.name + ' @ ' +self.group.name
+
+"""
+d01 first_step From scratch: Overview
+d01 (官方文档第一步的缩写 document01 )
+https://docs.djangoproject.com/en/1.8/intro/overview/
+"""
+
+class D01Reporter(models.Model):
     """
     新闻记者
     """
@@ -20,22 +121,22 @@ class Reporter(models.Model):
         return self.full_name
 
 
-class Article(models.Model):
+class D01Article(models.Model):
     """
     文章
     """
     pub_date = models.DateField()  # 日期型
     headline = models.CharField(max_length=200)
     content = models.TextField()  # TEXT文本型
-    reporter = models.ForeignKey(Reporter)  # 创建外键
+    reporter = models.ForeignKey(D01Reporter)  # 创建外键
 
     def __unicode__(self):  # __unicode__ on Python 2
         return self.headline
 
 
 """
-pools
-Tutorial 01: https://docs.djangoproject.com/en/1.8/intro/tutorial01/
+d01 pools
+d01 Tutorial 01: https://docs.djangoproject.com/en/1.8/intro/tutorial01/
 django 内置的filter已经很强大了
 
 >>> from polls.models import Question, Choice

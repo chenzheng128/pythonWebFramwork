@@ -3,7 +3,9 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Person, Article, Student
+from .models import *
+
+
 
 
 #* 改进：显示filed（Person类）
