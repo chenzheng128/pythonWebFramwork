@@ -1,16 +1,16 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
-from .models import Article, Reporter, Question
+from .models import D01Article, D01Reporter, Question
 
 
 class ArticleSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Article
+        model = D01Article
         fields = ('headline', 'content', 'pub_date', 'reporter')
 
 class ReporterSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Reporter
+        model = D01Reporter
         fields = ('full_name', )
 
 
