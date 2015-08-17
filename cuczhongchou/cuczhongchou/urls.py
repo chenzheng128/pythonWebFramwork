@@ -18,10 +18,31 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
-import d01_first_steps.views
+
+
+"""
+rest url define START >>> http://www.django-rest-framework.org/#requirements
+"""
+from django.contrib.auth.models import User
+from rest_framework import routers
+from  d01_first_steps import views
+
+router = routers.DefaultRouter()
+#注释users 与 groups view 使用后台管理
+router.register(r'users', views.UserViewSet)
+router.register(r'groups', views.GroupViewSet)
+router.register(r'articles', views.ArticleViewSet)
+router.register(r'reporters', views.ReporterViewSet)
+
+"""
+rest url define END <<<
+"""
 
 urlpatterns = [
 
+    #rest-framework  http://www.django-rest-framework.org/#requirements
+    url(r'^', include(router.urls)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
     ### d01_first_steps 官方 overview https://docs.djangoproject.com/en/1.8/intro/overview/
     # 使用 include 和 namespace file:///Users/chen/coding/documentations/django-docs-1.8-en/intro/tutorial03.html
@@ -30,9 +51,6 @@ urlpatterns = [
     ### learn 自强学社的参考代码
     url(r'^learn/', include('learn.urls' ) ),
 
-
-
     url(r'^admin/', include(admin.site.urls)),
-
 
 ]

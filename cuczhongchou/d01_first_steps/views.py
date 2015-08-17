@@ -10,6 +10,49 @@ from django.utils import timezone
 
 from .models import Article, Question, Choice
 
+
+"""
+django rest framework quickstart http://www.django-rest-framework.org/tutorial/quickstart/
+"""
+
+from django.contrib.auth.models import User, Group
+from rest_framework import viewsets
+from .models import Article, Reporter
+from .serializers import UserSerializer, GroupSerializer, ArticleSerializer, ReporterSerializer
+
+
+class ArticleViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = Article.objects.all().order_by('-pub_date')
+    serializer_class = ArticleSerializer
+
+
+class ReporterViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = Reporter.objects.all()
+    serializer_class = ReporterSerializer
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = User.objects.all().order_by('-date_joined')
+    serializer_class = UserSerializer
+
+
+class GroupViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
+
+
 """
     Tutorial 03 file:///Users/chen/coding/documentations/django-docs-1.8-en/intro/tutorial03.html
 """

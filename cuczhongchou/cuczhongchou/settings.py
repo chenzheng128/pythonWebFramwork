@@ -48,8 +48,23 @@ INSTALLED_APPS = (
     'learn',    #自强学社文档学习
     'd01_first_steps', #开始官方文档学习
     #'crowdfunding', # 众筹
+    'rest_framework', #rest 架构
 
 )
+
+
+# rest设置 http://www.django-rest-framework.org/#requirements
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    # 管理员 或 匿名用户只读
+    'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'],
+    # 仅管理员 
+    #'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
+    'PAGE_SIZE': 10,
+
+}
+
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
