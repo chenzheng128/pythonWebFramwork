@@ -52,15 +52,24 @@ INSTALLED_APPS = (
 
 )
 
-
+"""
 # rest设置 http://www.django-rest-framework.org/#requirements
+激活 DjangoModelPermissionsOrAnonReadOnly 权限设置
+  会导致下面错误: Cannot apply DjangoModelPermissions on a view that does not have
+    `.queryset` property or overrides the `.get_queryset()` method.
+  可以 单独在类的继承中激活permission 或是函数的decorator中使用permission装饰来解决
+  母亲
+
+"""
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     # 管理员 或 匿名用户只读
-    'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'],
+    #'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'],
     # 仅管理员 
-    #'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
+    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
+    #@api_vew
+
     'PAGE_SIZE': 10,
 
 }

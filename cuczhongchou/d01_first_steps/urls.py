@@ -7,7 +7,8 @@ import views
 """
 
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
+
+    url(r'^questions2$', views.index2, name='index2'),
 
     # ex: /polls/5/
     # 手工实现view
@@ -19,10 +20,10 @@ urlpatterns = [
 
 
     # file:///Users/chen/coding/documentations/django-docs-1.8-en/intro/tutorial04.html#amend-urlconf
-    url(r'^$', views.IndexView.as_view(), name='index'),
-    url(r'^(?P<pk>[0-9]+)/$', views.DetailView.as_view(), name='detail'),
-    url(r'^(?P<pk>[0-9]+)/results/$', views.ResultsView.as_view(), name='results'),
-    url(r'^(?P<question_id>[0-9]+)/vote/$', views.vote, name='vote'),
+    url(r'^quest/$', views.IndexView.as_view(), name='index'),
+    url(r'^quest/(?P<pk>[0-9]+)/$', views.DetailView.as_view(), name='detail'),
+    url(r'^quest/(?P<pk>[0-9]+)/results/$', views.ResultsView.as_view(), name='results'),
+    url(r'^quest/(?P<question_id>[0-9]+)/vote/$', views.vote, name='vote'),
 
 
 

@@ -7,9 +7,267 @@ from django.template import RequestContext, loader
 from django.shortcuts import get_object_or_404, render
 from django.views import generic
 from django.utils import timezone
+from rest_framework.renderers import JSONRenderer
 
 from .models import *
 
+
+
+"""
+创建json接口
+http://www.django-rest-framework.org/tutorial/1-serialization/
+"""
+
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.renderers import JSONRenderer
+from rest_framework.parsers import JSONParser
+from .models import Snippet
+from .serializers import SnippetSerializer
+
+"""
+手工方式创建的JSONReponse
+仅引用了 JSONRenderer JSONParser, 配合Serializer使用
+"""
+class JSONResponse(HttpResponse):
+    """
+    An HttpResponse that renders its content into JSON.
+    """
+    def __init__(self, data, **kwargs):
+        content = JSONRenderer().render(data)
+        kwargs['content_type'] = 'application/json'
+        super(JSONResponse, self).__init__(content, **kwargs)
+
+
+@csrf_exempt
+def snippet_list(request):
+    """
+    手工方式创建的代码Snippets List
+    List all code snippets, or create a new snippet.
+    """
+    if request.method == 'GET':
+        snippets = Snippet.objects.all()
+        serializer = SnippetSerializer(snippets, many=True)
+        return JSONResponse(serializer.data)
+
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = SnippetSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JSONResponse(serializer.data, status=201)
+        return JSONResponse(serializer.errors, status=400)
+
+
+@csrf_exempt
+def snippet_detail(request, pk):
+    """
+    Retrieve, update or delete a code snippet.
+    """
+    try:
+        snippet = Snippet.objects.get(pk=pk)
+    except Snippet.DoesNotExist:
+        return HttpResponse(status=404)
+
+    if request.method == 'GET':
+        serializer = SnippetSerializer(snippet)
+        return JSONResponse(serializer.data)
+
+    elif request.method == 'PUT':
+        data = JSONParser().parse(request)
+        serializer = SnippetSerializer(snippet, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JSONResponse(serializer.data)
+        return JSONResponse(serializer.errors, status=400)
+
+    elif request.method == 'DELETE':
+        snippet.delete()
+        return HttpResponse(status=204)
+
+"""
+snippet_list2  使用 @api_view 简化
+好像也没简化多少, 只是不再需要用到 JSONReponse了
+  也不再用到 data = JSONParser().parse(request)
+    直接使用 request.data 就可以
+
+tutorial02 里面的这个没试验成功. api_view 没装饰上去, 以后再调试
+"""
+
+from rest_framework import status, permissions
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.response import Response
+from .models import Snippet
+from .serializers import SnippetSerializer
+import rest_framework.renderers
+
+
+@api_view(['GET', 'POST'])
+@permission_classes([permissions.IsAdminUser,]) #覆盖global settings.py 中的DEFAULT_PERMISSION_CLASSES
+def snippet_list2(request, format=None):
+    """
+    使用 @api_view 简化的List \n
+    List all snippets, or create a new snippet.
+    """
+    if request.method == 'GET':
+        snippets = Snippet.objects.all()
+        serializer = SnippetSerializer(snippets, many=True)
+        return Response(serializer.data)
+        #return HttpResponse("snippet_list2")
+
+    elif request.method == 'POST':
+        serializer = SnippetSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def snippet_detail2(request, pk, format=None):
+    """
+    Retrieve, update or delete a snippet instance.
+    """
+    try:
+        snippet = Snippet.objects.get(pk=pk)
+    except Snippet.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = SnippetSerializer(snippet)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = SnippetSerializer(snippet, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        snippet.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+"""
+"""
+
+"""
+tutorial3 class base view
+http://www.django-rest-framework.org/tutorial/3-class-based-views/
+"""
+
+
+"""
+使用APIView类简化
+"""
+
+from rest_framework.views import APIView
+class SnippetList(APIView):
+
+    """
+    使用APIView类简化 \n
+    List all snippets, or create a new snippet.
+    """
+
+    permission_classes = (permissions.AllowAny, ) #覆盖global settings.py 中的DEFAULT_PERMISSION_CLASSES
+
+    def get(self, request, format=None):
+        snippets = Snippet.objects.all()
+        serializer = SnippetSerializer(snippets, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        serializer = SnippetSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class SnippetDetail(APIView):
+    """
+    Retrieve, update or delete a snippet instance.
+    """
+    def get_object(self, pk):
+        try:
+            return Snippet.objects.get(pk=pk)
+        except Snippet.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        snippet = self.get_object(pk)
+        serializer = SnippetSerializer(snippet)
+        return Response(serializer.data)
+
+    def put(self, request, pk, format=None):
+        snippet = self.get_object(pk)
+        serializer = SnippetSerializer(snippet, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk, format=None):
+        snippet = self.get_object(pk)
+        snippet.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+"""
+ snippet 使用 多个模板类 简化
+"""
+from rest_framework import mixins
+from rest_framework import generics
+
+class SnippetListB(mixins.ListModelMixin,
+                  mixins.CreateModelMixin,
+                  generics.GenericAPIView):
+    """
+     使用 多个模板类  mixins.ListModelMixin,
+                  mixins.CreateModelMixin,
+                  generics.GenericAPIView 简化的 List
+    """
+    queryset = Snippet.objects.all()
+    serializer_class = SnippetSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+
+class SnippetDetailB(mixins.RetrieveModelMixin,
+                    mixins.UpdateModelMixin,
+                    mixins.DestroyModelMixin,
+                    generics.GenericAPIView):
+    queryset = Snippet.objects.all()
+    serializer_class = SnippetSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
+
+
+
+"""
+ snippet 最简化版本
+"""
+class SnippetListC(generics.ListCreateAPIView):
+    """
+    最简化版本 继承 generics.ListCreateAPIView
+    """
+    permission_classes = (permissions.AllowAny, ) #覆盖global settings.py 中的DEFAULT_PERMISSION_CLASSES
+    queryset = Snippet.objects.all()
+    serializer_class = SnippetSerializer
+
+
+class SnippetDetailC(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Snippet.objects.all()
+    serializer_class = SnippetSerializer
 
 """
 django rest framework quickstart http://www.django-rest-framework.org/tutorial/quickstart/
@@ -62,7 +320,7 @@ class GroupViewSet(viewsets.ModelViewSet):
 """
 
 
-def index(request):
+def index2(request):
     latest_question_list = Question.objects.order_by('-pub_date')[:5]
     # output = ', '.join([p.question_text for p in latest_question_list])
     # #return HttpResponse(output)
@@ -125,6 +383,7 @@ def vote(request, question_id):
 
 
 class IndexView(generic.ListView):
+    print "debug: IndexView"
     template_name = 'd01_first_steps/polls_index.html'
     context_object_name = 'latest_question_list'
 
@@ -146,6 +405,7 @@ class IndexView(generic.ListView):
 
 
 class DetailView(generic.DetailView):
+    print "debug: DetailView"
     model = Question
     template_name = 'd01_first_steps/polls_detail.html'
 
