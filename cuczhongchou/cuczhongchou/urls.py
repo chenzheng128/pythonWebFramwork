@@ -73,7 +73,14 @@ urlpatterns = [
     url(r'^rest\/snippets3C/$', views.SnippetListC.as_view()),
     url(r'^rest\/snippets3C/(?P<pk>[0-9]+)/$', views.SnippetDetailC.as_view()),
 
+    #tutorial4 http://www.django-rest-framework.org/tutorial/4-authentication-and-permissions/
+    # 列举用户, 及其包含的 snippets
 
+    url(r'^rest\/snippets3D/$', views.SnippetListD.as_view()),
+    url(r'^rest\/snippets3D/(?P<pk>[0-9]+)/$', views.SnippetDetailD.as_view()),
+
+    url(r'^rest\/users2/$', views.UserList.as_view()),
+    url(r'^rest\/users2/(?P<pk>[0-9]+)/$', views.UserDetail.as_view()),
 
 
     ### d01_first_steps 官方 overview https://docs.djangoproject.com/en/1.8/intro/overview/

@@ -10,6 +10,8 @@ from django.utils import timezone
 from rest_framework.renderers import JSONRenderer
 
 from .models import *
+from .serializers import *
+from django.contrib.auth.models import User
 
 
 
@@ -260,14 +262,74 @@ class SnippetListC(generics.ListCreateAPIView):
     """
     最简化版本 继承 generics.ListCreateAPIView
     """
-    permission_classes = (permissions.AllowAny, ) #覆盖global settings.py 中的DEFAULT_PERMISSION_CLASSES
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
-
 
 class SnippetDetailC(generics.RetrieveUpdateDestroyAPIView):
+    """
+    最简化版本 继承 RetrieveUpdateDestroyAPIView \n
+    权限控制使用 IsAuthenticatedOrReadOnly 类, 只要是个登录用户就能随便改
+    """
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
+
+
+"""
+Tutorial 4
+http://www.django-rest-framework.org/tutorial/4-authentication-and-permissions/
+ 使用 UserSerializer 来展示用户的snippets
+"""
+
+
+from .permissions import IsOwnerOrReadOnly
+
+
+class SnippetListD(generics.ListCreateAPIView):
+    """
+    增加了 创建时(perform_create) 设置 owner 属性
+
+    追加了权限控制, 要认证才能发东西
+
+    *这个不行:
+    http POST http://127.0.0.1:8000/rest/snippets3D/ code="print 789"
+
+    *这个才可以:
+    http -a nic:nic POST http://127.0.0.1:8000/rest/snippets3D/ code="print 789"
+    """
+
+    queryset = Snippet.objects.all()
+    serializer_class = SnippetSerializer
+
+
+    # 可以打开认证了 TODO: 自定义的 IsOwnerOrReadOnly 合适发生作用?
+    #permission_classes =  (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly, )
+    permission_classes =  ( permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly, )
+
+    #tutorial 4 创建时, 追加owner信息
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+class SnippetDetailD(generics.RetrieveUpdateDestroyAPIView):
+    """
+    追加IsOwnerOrReadOnly 权限控制, 只有owner才能够进行编辑操作的方法了 \n
+    可以对比 snippets3C 来查看区别, 3C 只要是登录用户就可以删除东西
+
+    """
+    permission_classes =  ( permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly, )
+
+    queryset = Snippet.objects.all()
+    serializer_class = SnippetSerializer
+
+class UserList(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class UserDetail(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
 
 """
 django rest framework quickstart http://www.django-rest-framework.org/tutorial/quickstart/

@@ -52,7 +52,11 @@ SnippetSerializer 简化版本, 使用ModelSerializer , 类似于ModelForm, 很�
 class SnippetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Snippet
-        fields = ('id', 'title', 'code', 'linenos', 'language', 'style')
+        fields = ('id', 'title', 'code', 'linenos', 'language', 'style', 'owner_name', 'owner_email')
+
+    #tutorial4 将 owner 读出的属性 设置为 只读
+    owner_name = serializers.ReadOnlyField(source='owner.username')
+    owner_email = serializers.ReadOnlyField(source='owner.email')
 
 """
 rest QuickStart
@@ -69,9 +73,14 @@ class ReporterSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
+
+    """
+    在user中增加新的序列化字段
+    """
+    snippets = serializers.PrimaryKeyRelatedField(many=True, queryset=Snippet.objects.all())
     class Meta:
         model = User
-        fields = ('url', 'username', 'email', 'groups')
+        fields = ('url', 'username', 'email', 'groups', 'snippets')
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
