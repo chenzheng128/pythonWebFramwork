@@ -51,12 +51,81 @@ SnippetSerializer 简化版本, 使用ModelSerializer , 类似于ModelForm, 很�
 """
 class SnippetSerializer(serializers.ModelSerializer):
     class Meta:
+
+        model = Snippet
+        fields = ('id', 'title', 'code', 'linenos', 'language', 'style',)
+
+
+"""
+Tutorial4
+* 改进UserSerializer4, 附加 snippets 列表 效果: http://localhost:8000/rest/users4/
+* 改进SnippetSerializer4, 附加 owner _name, _email 信息 效果: http://localhost:8000/rest/snippets4/
+"""
+class SnippetSerializer4(serializers.ModelSerializer):
+    class Meta:
         model = Snippet
         fields = ('id', 'title', 'code', 'linenos', 'language', 'style', 'owner_name', 'owner_email')
 
     #tutorial4 将 owner 读出的属性 设置为 只读
     owner_name = serializers.ReadOnlyField(source='owner.username')
     owner_email = serializers.ReadOnlyField(source='owner.email')
+
+
+class UserSerializer4(serializers.ModelSerializer):
+
+    """
+    在user中增加新的序列化字段
+    """
+    snippets = serializers.PrimaryKeyRelatedField(many=True, queryset=Snippet.objects.all())
+    class Meta:
+        model = User
+        #TODO 为什么不用从 HyperlinkedModelSerializer 继承, 一样可以使用 url 属性?
+        fields = ('url', 'username', 'email', 'groups', 'snippets')
+
+"""
+tutorial5 using HyperlinkedModelSerializer
+"""
+class SnippetSerializer5(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Snippet
+        fields = ('url', 'id', 'title', 'code', 'linenos', 'language', 'style',
+                  'owner_name', 'owner_email', 'owner',
+                  'hightlight', )
+
+    #tutorial4 将 owner 读出的属性 设置为 只读
+    owner_name = serializers.ReadOnlyField(source='owner.username')
+    owner_email = serializers.ReadOnlyField(source='owner.email')
+    # api form 只读
+    #owner = serializers.HyperlinkedRelatedField(view_name='user-detail', read_only=True)
+    # api form 可选编辑. 但由于 perform_save() 默认设置 owner 为创建用户, 所以这里的编辑可选择, 但是始终会设置为owner
+    owner = serializers.HyperlinkedRelatedField(view_name='user-detail', queryset=User.objects.all())
+
+
+    hightlight = serializers.HyperlinkedIdentityField(view_name='snippet-highlight5', format='html')
+
+class UserSerializer5(serializers.HyperlinkedModelSerializer):
+
+    """
+    在user中增加snippets 连接,
+
+    many=True表示 返回多个结果
+    view_name='snippet-detail' 引用 snippet 链接
+    """
+    #url可以使用默认的设置指向 user-detail , 这里为了指向我们的 user-detail5 所以重载了一下
+    #url = serializers.HyperlinkedIdentityField(view_name='user-detail')
+
+    """
+    snippets 控制, 只读--无api表单, 可写--有api表单
+    """
+    #只读 -- 关闭表单
+    #snippets = serializers.HyperlinkedRelatedField(many=True, view_name='snippet-detail', read_only=True)
+    #可写 -- 打开了 snippet 的 可编辑功能
+    #TODO 希望实现 编辑 snippets 用户拥有的 snippets 反向更新, 但是未成功, 以后再试.
+    #snippets = serializers.HyperlinkedRelatedField(many=True, view_name='snippet-detail', read_only=False, queryset=Snippet.objects.all())
+    class Meta:
+        model = User
+        fields = ('url', 'username', 'email', 'groups', 'snippets')
+
 
 """
 rest QuickStart
@@ -73,14 +142,12 @@ class ReporterSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
-
     """
     在user中增加新的序列化字段
     """
-    snippets = serializers.PrimaryKeyRelatedField(many=True, queryset=Snippet.objects.all())
     class Meta:
         model = User
-        fields = ('url', 'username', 'email', 'groups', 'snippets')
+        fields = ('url', 'username', 'email', 'groups',)
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):

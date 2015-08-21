@@ -2,7 +2,7 @@
 from django.http.request import HttpRequest
 from django.http.response import HttpResponse, Http404, HttpResponseRedirect
 from django.core.handlers.wsgi import WSGIRequest
-from django.core.urlresolvers import reverse
+from django.core import urlresolvers
 from django.template import RequestContext, loader
 from django.shortcuts import get_object_or_404, render
 from django.views import generic
@@ -24,8 +24,8 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
-from .models import Snippet
-from .serializers import SnippetSerializer
+from .models import *
+from .serializers import *
 
 """
 手工方式创建的JSONReponse
@@ -299,8 +299,7 @@ class SnippetListD(generics.ListCreateAPIView):
     """
 
     queryset = Snippet.objects.all()
-    serializer_class = SnippetSerializer
-
+    serializer_class = SnippetSerializer4
 
     # 可以打开认证了 TODO: 自定义的 IsOwnerOrReadOnly 合适发生作用?
     #permission_classes =  (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly, )
@@ -319,16 +318,125 @@ class SnippetDetailD(generics.RetrieveUpdateDestroyAPIView):
     permission_classes =  ( permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly, )
 
     queryset = Snippet.objects.all()
-    serializer_class = SnippetSerializer
+    serializer_class = SnippetSerializer4
 
-class UserList(generics.ListAPIView):
+class UserListD(generics.ListAPIView):
     queryset = User.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = UserSerializer4
 
 
-class UserDetail(generics.RetrieveAPIView):
+class UserDetailD(generics.RetrieveAPIView):
     queryset = User.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = UserSerializer4
+
+"""
+Tutorial5 relationships-and-hyperlinked-apis
+http://www.django-rest-framework.org/tutorial/5-relationships-and-hyperlinked-apis/
+"""
+from rest_framework.reverse import reverse
+@api_view(('GET',))
+
+def api_root5(request, format=None):
+    """
+    自定义的 api_root(request, format=None):
+
+    format 参数: json/html
+
+    使用reverse('user-list', request=None, format=format),
+
+    * 非rest的reverse() 不用传入 request, 由于其只生成 /url即可,
+    * 但是rest的reverse() 用传入 request, 由于其要生成 完整的 http://ip/url 链接
+    """
+
+    return Response({
+
+        'users': reverse('user-list5', request=request, format=format),
+        'snippets': reverse('snippet-list5', request=request, format=format),
+        'z-snippets-fake-no-request':
+                reverse('snippet-list5', request=None, format=format)
+    })
+
+
+from rest_framework import renderers
+from rest_framework.response import Response
+
+"""
+    由于其实只想要 snippet 当中的 单个属性 highlighted 的数据
+
+    所以不继承 RetrieveModelMixin 类. 其 get 方法默认返回的是整个对象Model的serrialzer化 json数据.
+     ```
+     def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
+     ```
+
+    而是重写了 get类, 也不需要 serializer, 仅返回单个属性 Response(snippet.highlighted)
+
+"""
+class SnippetHighlight5(generics.GenericAPIView):
+    queryset = Snippet.objects.all()
+    renderer_classes = (renderers.StaticHTMLRenderer,)
+
+    def get(self, request, *args, **kwargs):
+        snippet = self.get_object()
+        #print "debug SnippetHighlight5 get ", snippet.highlighted
+        return Response(snippet.highlighted)
+
+
+class SnippetList5(generics.ListCreateAPIView):
+    """
+    ##SnippetList5
+    using SnippetSerializer5 HyperlinkedModelSerializer
+    """
+
+    queryset = Snippet.objects.all()
+    serializer_class = SnippetSerializer5
+
+
+    # 可以打开认证了 TODO: 自定义的 IsOwnerOrReadOnly 合适发生作用?
+    #permission_classes =  (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly, )
+    permission_classes =  ( permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly, )
+
+    #tutorial 4 创建时, 追加owner信息
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+class SnippetDetail5(generics.RetrieveUpdateDestroyAPIView):
+    """
+    SnippetDetail5
+    """
+    permission_classes =  ( permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly, )
+
+    queryset = Snippet.objects.all()
+    serializer_class = SnippetSerializer5
+
+class UserList5(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer5
+
+
+# 要使用 正确的 RetrieveUpdateAPIView 才能编辑
+class UserDetail5(generics.RetrieveUpdateAPIView):
+    permission_classes =  ( permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly, )
+    queryset = User.objects.all()
+    serializer_class = UserSerializer5
+
+    #TODO 希望通过重载能够实现 用户拥有的 snippets 反向更新, 但是未成功, 以后再试.
+    def update(self, request, *args, **kwargs):
+        print "UserDetail5 成功重载了 update"
+        partial = kwargs.pop('partial', False)
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+        print request.data
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+        return Response(serializer.data)
+
+    def perform_update(self, serializer):
+        print "UserDetail5 成功重载了 perform_update"
+        print serializer.data
+        serializer.save()
 
 
 """
@@ -436,7 +544,7 @@ def vote(request, question_id):
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
-        return HttpResponseRedirect(reverse('polls:results', args=(p.id,)))
+        return HttpResponseRedirect(urlresolvers.reverse('polls:results', args=(p.id,)))
 
 
 """

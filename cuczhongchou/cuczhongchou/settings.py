@@ -70,7 +70,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
     #@api_vew
 
-    'PAGE_SIZE': 10,
+    'PAGE_SIZE': 10, #定义 -list 翻页数量
 
 }
 

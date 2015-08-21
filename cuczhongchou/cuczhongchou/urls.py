@@ -34,7 +34,7 @@ from  d01_first_steps import views
 
 router = routers.DefaultRouter()
 # 注册 users 与 groups view 使用默认的router 后台管理
-router.register(r'users', views.UserViewSet)
+# router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
 router.register(r'articles', views.ArticleViewSet)
 router.register(r'reporters', views.ReporterViewSet)
@@ -76,12 +76,27 @@ urlpatterns = [
     #tutorial4 http://www.django-rest-framework.org/tutorial/4-authentication-and-permissions/
     # 列举用户, 及其包含的 snippets
 
-    url(r'^rest\/snippets3D/$', views.SnippetListD.as_view()),
-    url(r'^rest\/snippets3D/(?P<pk>[0-9]+)/$', views.SnippetDetailD.as_view()),
+    url(r'^rest\/snippets4/$', views.SnippetListD.as_view()),
+    url(r'^rest\/snippets4/(?P<pk>[0-9]+)/$', views.SnippetDetailD.as_view()),
 
-    url(r'^rest\/users2/$', views.UserList.as_view()),
-    url(r'^rest\/users2/(?P<pk>[0-9]+)/$', views.UserDetail.as_view()),
+    url(r'^rest\/users4/$', views.UserListD.as_view()),
+    url(r'^rest\/users4/(?P<pk>[0-9]+)/$', views.UserDetailD.as_view()),
 
+
+    # tutorial5 http://www.django-rest-framework.org/tutorial/5-relationships-and-hyperlinked-apis/
+    url(r'^rest5\/', views.api_root5),
+
+    url(r'^rest\/snippets5/$',
+        views.SnippetList5.as_view(), name='snippet-list5'),
+    #TODO -detail -list 是一个约束好的名字, 用snippet-detail5 会导致错误
+    url(r'^rest\/snippets5/(?P<pk>[0-9]+)/$',
+        views.SnippetDetail5.as_view(), name='snippet-detail'),
+    url(r'^rest\/snippets5/(?P<pk>[0-9]+)/highlight/$',
+        views.SnippetHighlight5.as_view(), name='snippet-highlight5'),
+    url(r'^rest\/users5/$',
+        views.UserList5.as_view(), name='user-list5'),
+    url(r'^rest\/users5/(?P<pk>[0-9]+)/$',
+        views.UserDetail5.as_view(), name='user-detail'),
 
     ### d01_first_steps 官方 overview https://docs.djangoproject.com/en/1.8/intro/overview/
     # 使用 include 和 namespace file:///Users/chen/coding/documentations/django-docs-1.8-en/intro/tutorial03.html
@@ -105,6 +120,11 @@ urlpatterns = format_suffix_patterns(urlpatterns)
 
 #router.urls 和 format_suffix_patterns 冲突了, 下移
 # #rest-framework  http://www.django-rest-framework.org/#requirements
-urlpatterns.append(  url(r'^rest\/', include(router.urls)) )
+urlpatterns += [
+    url(r'^rest\/', include(router.urls)) ,
+]
+
+
+
 
 #print urlpatterns

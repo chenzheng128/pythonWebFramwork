@@ -6,6 +6,11 @@ from .models import *
 # Register your models here.
 
 """
+rest Tutorial snippets
+"""
+admin.site.register(Snippet)
+
+"""
 d02 admin
 """
 admin.site.register(D02Album)
