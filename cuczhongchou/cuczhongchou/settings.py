@@ -141,9 +141,9 @@ default-character-set = utf8
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
 # admin 英文后台 bootstrap 风格更协调一些
-LANGUAGE_CODE = 'en-us'
+#LANGUAGE_CODE = 'en-us'
 # admin中文后台 TODO 将admin后台的字体缩小
-#LANGUAGE_CODE = 'zh-hans'
+LANGUAGE_CODE = 'zh-hans'
 
 TIME_ZONE = 'UTC'
 
