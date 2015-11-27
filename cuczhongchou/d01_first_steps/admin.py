@@ -62,14 +62,25 @@ admin.site.register(Question, QuestionAdmin)
 
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'publish_date', 'user', 'status')  # 列表显示的字段
+    list_display = ('title', 'checked', 'publish_date', 'user', 'status', )  # 列表显示的字段
     search_fields = ('title',)  # 列表包含根据指定字段搜索
     list_filter = ('publish_date',)  # 右侧过滤选项
 
     # 分组表单
     fieldsets = (
-        ('基本信息', {'fields': ('title', 'content', 'excerpt', 'publish_date', 'status', 'user', 'categories', 'tags')}),
-        ('Meta Data', {'fields': ('alias', 'keywords', 'description')}),
+        ('基本信息', {'fields': ('title', 'checked', 'content', 'excerpt', 'publish_date', 'status', 'user', 'categories', 'tags')}),
+        ('Meta Data', {'fields': ('alias', 'keywords', 'description', )}),
+    )
+
+class PostAdminCheck(admin.ModelAdmin):
+    list_display = ('title', 'checked',)  # 列表显示的字段
+    search_fields = ('title',)  # 列表包含根据指定字段搜索
+    list_filter = ('publish_date',)  # 右侧过滤选项
+
+    # 分组表单
+    fieldsets = (
+        ('基本信息', {'fields': ('title', 'checked', 'content', 'excerpt', 'publish_date', 'status', 'user', 'categories', 'tags')}),
+        ('Meta Data', {'fields': ('alias', 'keywords', 'description', )}),
     )
 
 """
