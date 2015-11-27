@@ -5,8 +5,16 @@
 ##依赖包
 项目所依赖包的描述信息 (名称与版本) 存在 requirements.txt中, 依赖包安装方法(如果网络速度慢,建议设置pip 镜像)
 ```
+#安装依赖包
 pip install -r requirements.txt
+#重新生成 requirements.txt 文件
+pip freeze > requirements.txt
 ```
+
+## app 目录结构
+* /learn 学堂在线的学习代码
+* /d01_first_steps 官方网站代码(Question/Article) + 博客代码(Blog) + RestFramework(CodeSnippet) 代码示例
+
 
 ###pip镜像设置方法
 新建目录与文件(Windows: %HOMEPATH%/pip/pip.ini Linux: ~/.pip/pip.conf , 增加内容如下

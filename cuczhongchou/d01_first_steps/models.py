@@ -42,6 +42,8 @@ class Snippet(models.Model):
 
 
     class Meta:
+        #verbose_name = '选项'
+        verbose_name_plural = 'Snippets (Rest Demo)'
         ordering = ('created',)
 
 
@@ -290,7 +292,7 @@ class Question(models.Model):
 
     class Meta:
         verbose_name = '投票问题'
-        verbose_name_plural = '投票问题'
+        verbose_name_plural = '投票问题 (Question)'
 
     # 增加自定义方法
     def was_published_recently(self):
@@ -334,8 +336,8 @@ class Category(models.Model):
     sort = models.SmallIntegerField('排序', default=100)  # 排序
 
     class Meta:
-        verbose_name = '分类'
-        verbose_name_plural = '分类'
+        verbose_name = '分类(Category)'
+        verbose_name_plural = 'Blog 分类 (Categorys)'
         ordering = ['sort']
 
     def __unicode__(self):
@@ -350,8 +352,8 @@ class Tag(models.Model):
     post_ids = models.TextField(editable=False)  # 对应的文章 id 集合的序列
 
     class Meta:
-        verbose_name = '标签'
-        verbose_name_plural = '标签'
+        verbose_name = '标签(Tag)'
+        verbose_name_plural = 'Blog 标签(Tags)'
 
     def __unicode__(self):
         return self.tagname
@@ -396,9 +398,11 @@ class Post(models.Model):
                                         verbose_name='标签',
                                         related_name="posts2")  # 标签
 
+    checked = models.BooleanField(u'审核', default=False)  #审核
+
     class Meta:
-        verbose_name = '文章'
-        verbose_name_plural = '文章'
+        verbose_name = '文章(Post)'
+        verbose_name_plural = 'Blog 文章 (Posts)'
         ordering = ['publish_date']
 
     def __unicode__(self):
