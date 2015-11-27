@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
-
+from import_export.admin import ImportExportModelAdmin
 # Register your models here.
 
 from .models import *
-
 
 
 
@@ -18,7 +17,7 @@ admin.site.register(Person, PersonAdmin)
 
 
 # 在列表显示 article 字段
-class ArticleAdmin(admin.ModelAdmin):
+class ArticleAdmin(ImportExportModelAdmin):
 
 	#后台 列表显示字段 
     list_display = ('title', 'contentShort', 'pub_date','update_time',)

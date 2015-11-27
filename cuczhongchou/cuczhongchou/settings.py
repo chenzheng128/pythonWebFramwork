@@ -49,6 +49,7 @@ INSTALLED_APPS = (
     'd01_first_steps', #开始官方文档学习
     #'crowdfunding', # 众筹
     'rest_framework', #rest 架构
+    'import_export', #文件导入与导出
 
 )
 

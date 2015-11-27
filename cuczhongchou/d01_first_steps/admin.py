@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
+from import_export.admin import ImportExportModelAdmin
 
 from .models import *
 
@@ -60,8 +61,7 @@ class QuestionAdmin(admin.ModelAdmin):
 
 admin.site.register(Question, QuestionAdmin)
 
-
-class PostAdmin(admin.ModelAdmin):
+class PostAdmin(ImportExportModelAdmin):
     list_display = ('title', 'checked', 'publish_date', 'user', 'status', )  # 列表显示的字段
     search_fields = ('title',)  # 列表包含根据指定字段搜索
     list_filter = ('publish_date',)  # 右侧过滤选项
