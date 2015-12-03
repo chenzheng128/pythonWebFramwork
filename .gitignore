@@ -112,3 +112,4 @@ $RECYCLE.BIN/
 .project
 
 venv/bin/activate
+cuczhongchou/cucMsg/config.py

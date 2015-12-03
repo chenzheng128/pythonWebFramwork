@@ -32,7 +32,14 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+"""
+ 需要安装的外部包
+ pip install wechat
+ pip install django
+
+"""
 # Application definition
+
 
 INSTALLED_APPS = (
     ##这句话可以激活/关闭 admin 后台的 bootstrapped 风格
