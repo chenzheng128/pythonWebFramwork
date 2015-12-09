@@ -2,7 +2,7 @@
 
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
-from .models import D01Article, D01Reporter, Question
+from .models import D01Article, D01Reporter, Question, Post
 
 """
 Rest Tutorial 1 serialzation
@@ -45,7 +45,10 @@ class SnippetSerializerRaw(serializers.Serializer):
 """
 SnippetSerializer 简化版本, 使用ModelSerializer , 类似于ModelForm, 很多信息从model中取出
 查看实际生成的代码
->>> from snippets.serializers import SnippetSerializer
+ (使用 ipython %paste)
+$ ./manage.py shell
+In [1]: %paste
+>>> from d01_first_steps.serializers import SnippetSerializer
 >>> serializer = SnippetSerializer()
 >>> print(repr(serializer))
 """
@@ -154,3 +157,16 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Group
         fields = ('url', 'name')
+
+
+
+"""
+Post Serializer
+"""
+class PostSerializer5(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Post
+        fields = ('title', 'content', 'excerpt', 'publish_date', 'status', 'comments_count', 'view_count',
+                  'alias', 'kyewords', 'description',
+                  'user', )
+
