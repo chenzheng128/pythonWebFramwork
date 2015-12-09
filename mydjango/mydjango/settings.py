@@ -172,7 +172,7 @@ STATIC_URL = '/static/'
 #在终端显示日志输出
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': True,
+    'disable_existing_loggers': False, #打开日志
     'formatters': {
         'verbose': {
             'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
@@ -183,7 +183,11 @@ LOGGING = {
             'level': 'NOTSET',
             'class': 'logging.StreamHandler',
             'formatter': 'verbose'
-        }
+        },
+        'null': {   #定义 null handler
+            'level': 'DEBUG',
+            'class':'django.utils.log.NullHandler',
+            },
     },
     'loggers': {
         '': {
@@ -194,6 +198,10 @@ LOGGING = {
             'handlers': ['console'],
             'propagate': False,
             'level': 'ERROR'
-        }
+        },
+        'django.db.backends': {
+            'handlers': ['null'], # 关闭 sql 日志 Quiet by default!
+            'propagate': False,'level':'DEBUG',
+        },
     }
 }
