@@ -59,11 +59,11 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
-    'learn',    #自强学社文档学习
-    'd01_first_steps',    #从 官方文档学习 到一个示范性 app
+
+    'learn',  #自强学社文档学习
+    'demoapp',  #从 官方文档学习 到一个示范性 app
     #'crowdfunding', # 众筹
-    'rest_framework', #rest 架构
+    'rest_framework',  #rest 架构
     'import_export', #文件导入与导出
 
 )

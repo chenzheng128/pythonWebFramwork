@@ -33,7 +33,7 @@ def step02(request):
 
 # step03 处理add;
 # step03 Examples: 从/add/?a=4&b=5 读取参数
-# urls.py url(r'^add/$', 'learn.views.add', name='add'), 
+# urls.py url(r'^add/$', 'learn.views.add', name='add'),
 def add(request):
     try:
         a = request.GET['a']

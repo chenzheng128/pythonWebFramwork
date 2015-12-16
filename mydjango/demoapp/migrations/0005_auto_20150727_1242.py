@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('d01_first_steps', '0004_auto_20150727_1232'),
+        ('demoapp', '0004_auto_20150727_1232'),
     ]
 
     operations = [
@@ -41,7 +41,7 @@ class Migration(migrations.Migration):
                 ('alias', models.CharField(max_length=100, verbose_name=b'\xe5\x88\xab\xe5\x90\x8d', blank=True)),
                 ('keywords', models.CharField(max_length=500, verbose_name=b'\xe5\x85\xb3\xe9\x94\xae\xe5\xad\x97', blank=True)),
                 ('description', models.TextField(verbose_name=b'\xe6\x8f\x8f\xe8\xbf\xb0', blank=True)),
-                ('categories', models.ManyToManyField(related_name='posts', verbose_name=b'\xe5\x88\x86\xe7\xb1\xbb', to='d01_first_steps.Category', blank=True)),
+                ('categories', models.ManyToManyField(related_name='posts', verbose_name=b'\xe5\x88\x86\xe7\xb1\xbb', to='demoapp.Category', blank=True)),
                 ('user', models.ForeignKey(related_name='posts', verbose_name=b'\xe4\xbd\x9c\xe8\x80\x85', to=settings.AUTH_USER_MODEL)),
             ],
             options={

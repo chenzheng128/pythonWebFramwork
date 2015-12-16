@@ -8,7 +8,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('d01_first_steps', '0017_auto_20151209_0529'),
+        ('demoapp', '0017_auto_20151209_0529'),
     ]
 
     operations = [
@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
                 'proxy': True,
                 'verbose_name_plural': 'Proxy \u6587\u7ae0 \u5ba1\u6838 ( admin.py \u4e2d\u5feb\u6377\u52a0\u5165)',
             },
-            bases=('d01_first_steps.post',),
+            bases=('demoapp.post',),
         ),
         migrations.CreateModel(
             name='PostProxyModel',
@@ -32,7 +32,7 @@ class Migration(migrations.Migration):
                 'proxy': True,
                 'verbose_name_plural': 'Proxy \u6587\u7ae0\u5ba1\u6838',
             },
-            bases=('d01_first_steps.post',),
+            bases=('demoapp.post',),
         ),
         migrations.AddField(
             model_name='post',

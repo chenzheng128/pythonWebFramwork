@@ -30,7 +30,7 @@ curl -H 'Accept: application/json; indent=4' -u admin:amin http://127.0.0.1:8000
 """
 from django.contrib.auth.models import User
 from rest_framework import routers
-from  d01_first_steps import views
+from  demoapp import views
 
 router = routers.DefaultRouter()
 # 注册 users 与 groups view 使用默认的router 后台管理
@@ -98,12 +98,12 @@ urlpatterns = [
     url(r'^rest\/users5/(?P<pk>[0-9]+)/$',
         views.UserDetail5.as_view(), name='user-detail'),
 
-    ### d01_first_steps 官方 overview https://docs.djangoproject.com/en/1.8/intro/overview/
+    ### demoapp 官方 overview https://docs.djangoproject.com/en/1.8/intro/overview/
     # 使用 include 和 namespace file:///Users/chen/coding/documentations/django-docs-1.8-en/intro/tutorial03.html
-    url(r'^d01/', include('d01_first_steps.urls' , namespace="polls") ) ,
+    url(r'^d01/', include('demoapp.urls', namespace="polls")) ,
 
     ### learn 自强学社的参考代码
-    url(r'^learn/', include('learn.urls' ) ),
+    url(r'^learn/', include('learn.urls')),
     #
     url(r'^admin/', include(admin.site.urls)),
 

@@ -7,13 +7,13 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('d01_first_steps', '0005_auto_20150727_1242'),
+        ('demoapp', '0007_post_tags'),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='category',
-            name='sort',
-            field=models.SmallIntegerField(default=100, verbose_name=b'\xe6\x8e\x92\xe5\xba\x8f'),
+            model_name='post',
+            name='tags',
+            field=models.ManyToManyField(related_name='posts2', verbose_name=b'\xe6\xa0\x87\xe7\xad\xbe', to='demoapp.Tag', blank=True),
         ),
     ]

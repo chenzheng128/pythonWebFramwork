@@ -7,7 +7,7 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('d01_first_steps', '0012_auto_20150806_1331'),
+        ('demoapp', '0012_auto_20150806_1331'),
     ]
 
     operations = [
@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('date_joined', models.DateField()),
                 ('invite_reason', models.CharField(max_length=64)),
-                ('group', models.ForeignKey(to='d01_first_steps.D02Group')),
+                ('group', models.ForeignKey(to='demoapp.D02Group')),
             ],
         ),
         migrations.CreateModel(
@@ -37,11 +37,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='d02membership',
             name='person',
-            field=models.ForeignKey(to='d01_first_steps.D02Person'),
+            field=models.ForeignKey(to='demoapp.D02Person'),
         ),
         migrations.AddField(
             model_name='d02group',
             name='members',
-            field=models.ManyToManyField(to='d01_first_steps.D02Person', through='d01_first_steps.D02Membership'),
+            field=models.ManyToManyField(to='demoapp.D02Person', through='demoapp.D02Membership'),
         ),
     ]

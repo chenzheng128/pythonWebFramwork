@@ -7,29 +7,31 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('d01_first_steps', '0001_initial'),
+        ('demoapp', '0009_question_checked'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Choice',
+            name='D02Album',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('choice_text', models.CharField(max_length=200)),
-                ('votes', models.IntegerField(default=0)),
+                ('name', models.CharField(max_length=100)),
+                ('release_date', models.DateField()),
+                ('num_stars', models.IntegerField()),
             ],
         ),
         migrations.CreateModel(
-            name='Question',
+            name='D02Musician',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('question_text', models.CharField(max_length=200, verbose_name=b'\xe9\x97\xae\xe9\xa2\x98')),
-                ('date published', models.DateTimeField(verbose_name=b'\xe5\x8f\x91\xe5\xb8\x83\xe6\x97\xa5\xe6\x9c\x9f')),
+                ('first_name', models.CharField(max_length=50)),
+                ('last_name', models.CharField(max_length=50)),
+                ('instrument', models.CharField(max_length=100)),
             ],
         ),
         migrations.AddField(
-            model_name='choice',
-            name='question',
-            field=models.ForeignKey(to='d01_first_steps.Question'),
+            model_name='d02album',
+            name='artist',
+            field=models.ForeignKey(to='demoapp.D02Musician'),
         ),
     ]

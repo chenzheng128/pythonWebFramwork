@@ -13,7 +13,7 @@ pip freeze > requirements.txt
 
 ## app 目录结构
 * /learn 学堂在线的学习代码
-* /d01_first_steps 官方网站代码(Question/Article) + 博客代码(Blog) + RestFramework(CodeSnippet) 代码示例
+* /demoapp 从 官方网站代码(Question/Article) + 博客代码(Blog) + RestFramework(CodeSnippet) 代码示例, 过渡为一个正式的demoapp
 
 
 ###pip镜像设置方法
