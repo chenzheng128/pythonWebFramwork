@@ -400,6 +400,9 @@ class Post(models.Model):
 
     checked = models.BooleanField(u'审核', default=False)  #审核
 
+    updated_time = models.DateTimeField(u'更新时间(自动维护)', auto_now=True, null=True)  # 自动记录更新时间
+    created_time = models.DateTimeField(u'创建时间(自动维护)', auto_now_add=True, null=True)  # 创建时间
+
     class Meta:
         verbose_name = '文章(Post)'
         verbose_name_plural = 'Blog 文章 (Posts)'
@@ -409,3 +412,24 @@ class Post(models.Model):
         return self.title
 
     # Create your models here.
+
+
+class PostProxyModel(Post):
+    # 自定义字段
+    def chatid(self):
+        chatid = "PostProxyCheck%d" % self.id  # 对命名作一定设置, 创建后不可删除 #App名称/Test/4位会话编码
+        return chatid
+
+    chatid.short_description = "企业会话chatid"
+    chatid = property(chatid)
+
+    def save(self, *args, **kwargs):
+        # super save()
+        #策略更新成功, 消息发送成功时, 才保存数据
+        super(Post, self).save(*args, **kwargs)  # Call the "real" save() method.
+
+    class Meta:
+        proxy = True # 定义为代理
+        verbose_name = '文章审核'
+        verbose_name_plural = 'Proxy 文章审核'
+        ordering = ['-updated_time', '-id']

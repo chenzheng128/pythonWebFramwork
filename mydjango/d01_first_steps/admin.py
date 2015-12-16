@@ -6,6 +6,27 @@ from .models import *
 
 # Register your models here.
 
+def create_modeladmin(model, modeladmin, name = None, verbose_name = None):
+    """
+    创建模型的不同管理视图  http://stackoverflow.com/questions/2223375/multiple-modeladmins-views-for-same-model-in-django-admin
+    :param modeladmin:
+    :param model:
+    :param name:
+    :return:
+    """
+    class  Meta:
+        proxy = True
+        app_label = model._meta.app_label
+        verbose_name_plural = verbose_name
+
+    attrs = {'__module__': '', 'Meta': Meta}
+
+    newmodel = type(name, (model,), attrs)
+
+    admin.site.register(newmodel, modeladmin)
+    return modeladmin
+
+
 """
 rest Tutorial snippets
 """
@@ -61,7 +82,11 @@ class QuestionAdmin(admin.ModelAdmin):
 
 admin.site.register(Question, QuestionAdmin)
 
-class PostAdmin(ImportExportModelAdmin):
+"""
+#博客管理
+"""
+
+class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'checked', 'publish_date', 'user', 'status', )  # 列表显示的字段
     search_fields = ('title',)  # 列表包含根据指定字段搜索
     list_filter = ('publish_date',)  # 右侧过滤选项
@@ -71,6 +96,10 @@ class PostAdmin(ImportExportModelAdmin):
         ('基本信息', {'fields': ('title', 'checked', 'content', 'excerpt', 'publish_date', 'status', 'user', 'categories', 'tags')}),
         ('Meta Data', {'fields': ('alias', 'keywords', 'description', )}),
     )
+
+class PostQuickAdmin(ImportExportModelAdmin):
+    list_display = ('title', 'checked', 'publish_date', 'user', 'status', )  # 列表显示的字段
+    pass
 
 class PostAdminCheck(admin.ModelAdmin):
     list_display = ('title', 'checked',)  # 列表显示的字段
@@ -83,10 +112,17 @@ class PostAdminCheck(admin.ModelAdmin):
         ('Meta Data', {'fields': ('alias', 'keywords', 'description', )}),
     )
 
-"""
-#博客管理
-"""
+
 
 admin.site.register(Post, PostAdmin)
 admin.site.register(Category)
 admin.site.register(Tag)
+
+"""
+#博客管理 ProxyModel
+"""
+
+#快速 建立管理视图Proxy (不必创建ProxyModel)
+create_modeladmin(Post, PostQuickAdmin, name='postAdminCheck', verbose_name="Proxy 文章 导入导出 ( admin.py 中快捷加入)") #创建Site扩展管理视图
+#正式 建立管理视图Proxy (创建ProxyModel )
+admin.site.register(PostProxyModel, PostAdminCheck)
