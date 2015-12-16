@@ -32,11 +32,19 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+#建立venv, 在venv下安装最新的库(-U), 保存库信息
 """
- 需要安装的外部包
- pip install wechat
- pip install django
+virtualenv venv
+source venv/bin/active
 
+pip install --upgrade MySQL-python paramiko wechat    #mysql / ssh接口 / wechat
+pip install --upgrade django-admin-bootstrapped
+pip install --upgrade django-import-export      #excel文件导入与导出 #
+pip install --upgrade djangorestframework
+pip install --upgrade django-model-utils      #跟踪field变化 from model_utils import FieldTracker #检测字段变化
+pip install --upgrade django-dbbackup         #数据库备份与恢复,  未调试成功
+
+pip freeze  > requirements.txt
 """
 # Application definition
 
@@ -53,7 +61,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     
     'learn',    #自强学社文档学习
-    'd01_first_steps', #开始官方文档学习
+    'd01_first_steps',    #从 官方文档学习 到一个示范性 app
     #'crowdfunding', # 众筹
     'rest_framework', #rest 架构
     'import_export', #文件导入与导出
@@ -185,8 +193,9 @@ LOGGING = {
             'formatter': 'verbose'
         },
         'null': {   #定义 null handler
-            'level': 'DEBUG',
-            'class':'django.utils.log.NullHandler',
+            #'level': 'DEBUG',
+            #'class':'django.utils.log.NullHandler',  #1.8
+            'class':'logging.NullHandler',  #1.9
             },
     },
     'loggers': {
