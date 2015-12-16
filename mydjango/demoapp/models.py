@@ -425,7 +425,6 @@ class PostProxyModel(Post):
 
     def save(self, *args, **kwargs):
         # super save()
-        #策略更新成功, 消息发送成功时, 才保存数据
         super(Post, self).save(*args, **kwargs)  # Call the "real" save() method.
 
     class Meta:
