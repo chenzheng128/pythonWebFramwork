@@ -40,7 +40,7 @@ router.register(r'articles', views.ArticleViewSet)
 router.register(r'reporters', views.ReporterViewSet)
 
 # 注册 Post Rest 接口
-router.register(r'Post', views.PostViewSet)
+# router.register(r'Post', views.PostViewSet)
 
 # router.register(r'snippets22', views.SnippetList, base_name="Snippet")
 
